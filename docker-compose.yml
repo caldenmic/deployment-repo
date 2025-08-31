@@ -1,0 +1,103 @@
+services:
+    logging-service:
+        image: logging-service:latest
+        container_name: logging-service
+        networks:
+            - tber-network
+        volumes:
+            - /Users/caldenmichaeldsouza/Desktop/Projects/uber-clone/logs:/usr/src/app/logs
+        env_file:
+            - /Users/caldenmichaeldsouza/Desktop/Projects/uber-clone/.env.logging
+    
+    registration-service:
+        image: registration-service:latest
+        container_name: registration-service
+        networks:
+            - tber-network
+        expose:
+            - "3636"
+        ports:
+            - "3636:3636"
+        env_file:
+            - /Users/caldenmichaeldsouza/Desktop/Projects/uber-clone/.env.registration
+    
+    booking-service:
+        image: booking-service:latest
+        container_name: booking-service
+        networks:
+            - tber-network
+        expose:
+            - "3637"
+        ports:
+            - "3637:3637"
+        env_file:
+            - /Users/caldenmichaeldsouza/Desktop/Projects/uber-clone/.env.booking
+            
+    location-service:
+        image: location-service:latest
+        container_name: location-service
+        networks:
+            - tber-network
+        expose:
+            - "3638"
+        ports:
+            - "3638:3638"
+        env_file:
+            - /Users/caldenmichaeldsouza/Desktop/Projects/uber-clone/.env.location
+            
+    websocket-server:
+        image: websocket-server:latest
+        container_name: websocket-server
+        networks:
+            - tber-network
+        expose:
+            - "9034"
+        ports:
+            - "9034:9034"
+        volumes:
+            - /Users/caldenmichaeldsouza/Desktop/Projects/uber-clone/certs:/usr/src/app/certs
+        env_file:
+            - /Users/caldenmichaeldsouza/Desktop/Projects/uber-clone/.env.websocket
+            
+    krakend:
+        image: devopsfaith/krakend
+        container_name: api-gateway
+        networks:
+            - tber-network
+        ports:
+            - "8080:8080"
+        volumes:
+            - /Users/caldenmichaeldsouza/Desktop/Projects/uber-clone/krakend.json:/etc/krakend/krakend.json
+        command: ["run", "-c", "/etc/krakend/krakend.json", "-d"]
+            
+    tber-redis:
+        image: redis:alpine
+        container_name: tber-redis
+        networks:
+            - tber-network
+        ports:
+            - "3697:6379"
+        expose:
+            - "6379"
+        restart: always
+        
+    tber-postgres:
+        image: postgres:17.5      # Postgres 17.5
+        container_name: tber-postgres
+        environment:
+            POSTGRES_USER: <i-know-shouldnt-have-added-it-here-will-add-it-somewhere-else>
+            POSTGRES_PASSWORD: <i-know-shouldnt-have-added-it-here-will-add-it-somewhere-else>
+            POSTGRES_DB: <i-know-shouldnt-have-added-it-here-will-add-it-somewhere-else>
+        ports:
+            - "5433:5432"
+        networks:
+            - tber-network
+        volumes:
+            - /Users/caldenmichaeldsouza/Desktop/Projects/uber-clone/postgres_data_prod:/var/lib/postgresql/data
+        command: >
+            bash -c "apt-get update && apt-get install -y postgresql-17-postgis-3 && docker-entrypoint.sh postgres"
+        restart: always
+            
+networks:
+    tber-network:
+        name: tber-network
