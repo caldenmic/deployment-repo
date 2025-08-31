@@ -1,0 +1,197 @@
+{
+  "version": 3,
+  "endpoints": [
+    {
+      "endpoint": "/driver/{path}",
+      "method": "POST",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/driver/{path}",
+          "host": ["http://registration-service:3636"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    },
+    {
+      "endpoint": "/driver/{path}",
+      "method": "GET",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/driver/{path}",
+          "host": ["http://registration-service:3636"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    },
+    {
+      "endpoint": "/user/{path}",
+      "method": "POST",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type", "Cookie"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/user/{path}",
+          "host": ["http://registration-service:3636"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    },
+    {
+      "endpoint": "/user/{path}",
+      "method": "GET",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/user/{path}",
+          "host": ["http://registration-service:3636"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    },
+    {
+      "endpoint": "/token/{path}",
+      "method": "GET",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type", "Cookie"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/token/{path}",
+          "host": ["http://registration-service:3636"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    },
+    {
+      "endpoint": "/booking/{path}",
+      "method": "GET",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/booking/{path}",
+          "host": ["http://booking-service:3637"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    },
+    {
+      "endpoint": "/booking/{path}",
+      "method": "POST",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/booking/{path}",
+          "host": ["http://booking-service:3637"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    },
+    {
+      "endpoint": "/locations/{path}",
+      "method": "GET",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type"],
+      "input_query_strings": ["*"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/locations/{path}",
+          "host": ["http://location-service:3638"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    },
+    {
+      "endpoint": "/locations",
+      "method": "GET",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type"],
+      "input_query_strings": ["*"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/locations",
+          "host": ["http://location-service:3638"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    },
+    {
+      "endpoint": "/locations/{path}",
+      "method": "POST",
+      "encoding": "no-op",
+      "output_encoding": "no-op",
+      "input_headers": ["Authorization", "Content-Type"],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/locations/{path}",
+          "host": ["http://location-service:3638"],
+          "encoding": "no-op"
+        }
+      ],
+      "extra_config": {
+        "proxy": {
+          "sequential": true
+        }
+      }
+    }
+  ]
+}
